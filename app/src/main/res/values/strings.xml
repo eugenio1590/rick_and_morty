@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">Rick and Morty</string>
+
+    <!-- Actions -->
+    <string name="try_again_action">Try again</string>
+
+    <!-- Error Messages -->
+    <string name="no_internet_error_message">
+        Seems you\'ve tripped into a glitched portal. The Wi-Fi here is weirder than
+        a Gazorpazorp\'s sitcom. No signal in this dimension! Fix those cables before you end up
+        in a dimension where Meeseeks sends texts in interpretive dance.
+    </string>
+    <string name="no_found_error_message">
+        Looks like the resource you\'re hunting for got caught in a temporal tug-of-war.
+        It\'s off on an adventure through the time vortex. Better equip your time-traveling gear or
+        risk ending up in a dimension where smartphones communicate via Morse code.
+        Go on, chase that file through the time stream, and try again!
+    </string>
+    <string name="service_unavailable_error_message">
+        Our service is off exploring dimensions, and all we found was a box labeled \'Adult Papers.\'
+        While we reel it back in, imagine the adventures of our digital hamster.
+        We\'ll be back faster than an interdimensional paper trail!
+    </string>
+    <string name="unknown_error_message">
+        The cosmic code hiccuped into an unknown error – think of it as stumbling upon
+        a mystery substance in the digital realm. Lab coats are on, goggles are strapped,
+        and we\'re decoding this glitchy mix. Stick around; we\'ll fix it faster than
+        a quantum bunny on roller skates. Brace yourself for a byte-sized cosmic conundrum solution!
+    </string>
 </resources>
