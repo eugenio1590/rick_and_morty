@@ -5,18 +5,23 @@ import com.app.rickandmorty.config.Constants.FIRST_PAGE
 import com.app.rickandmorty.config.Constants.PAGE_SIZE
 import com.app.rickandmorty.domain.interactor.episode.SearchEpisodes
 import com.app.rickandmorty.domain.model.Episode
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.jetbrains.annotations.TestOnly
+import javax.inject.Inject
 
 /**
  * ViewModel for managing the UI state and logic related to episode search.
  *
  * @param searchEpisodes The use case responsible for searching episodes.
  */
-class ViewModel(private val searchEpisodes: SearchEpisodes) : androidx.lifecycle.ViewModel() {
+@HiltViewModel
+class ViewModel @Inject constructor(
+    private val searchEpisodes: SearchEpisodes
+) : androidx.lifecycle.ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
 
