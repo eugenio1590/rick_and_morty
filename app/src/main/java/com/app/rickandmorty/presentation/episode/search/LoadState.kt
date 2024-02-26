@@ -1,6 +1,7 @@
 package com.app.rickandmorty.presentation.episode.search
 
 import com.app.rickandmorty.domain.model.Episode
+import com.app.rickandmorty.presentation.ErrorMessage
 
 /**
  * Sealed interface representing the various states of loading for a paginated episode list.
@@ -27,7 +28,7 @@ sealed interface LoadState {
     /**
      * Failure state indicating that an error occurred while loading the data.
      *
-     * @param error The exception representing the loading failure.
+     * @param message The error message representing the loading failure.
      */
-    data class Failure(val error: Exception) : LoadState
+    data class Failure(val message: ErrorMessage) : LoadState
 }

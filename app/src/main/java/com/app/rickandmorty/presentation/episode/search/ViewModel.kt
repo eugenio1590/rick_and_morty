@@ -5,6 +5,7 @@ import com.app.rickandmorty.config.Constants.FIRST_PAGE
 import com.app.rickandmorty.config.Constants.PAGE_SIZE
 import com.app.rickandmorty.domain.interactor.episode.SearchEpisodes
 import com.app.rickandmorty.domain.model.Episode
+import com.app.rickandmorty.presentation.ErrorConverter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,8 +21,12 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ViewModel @Inject constructor(
-    private val searchEpisodes: SearchEpisodes
+    private val searchEpisodes: SearchEpisodes,
+    private val errorConverter: ErrorConverter
 ) : androidx.lifecycle.ViewModel() {
+
+    @TestOnly
+    constructor(searchEpisodes: SearchEpisodes) : this(searchEpisodes, ErrorConverter())
 
     private val _uiState = MutableStateFlow(UiState())
 
@@ -60,7 +65,8 @@ class ViewModel @Inject constructor(
 
                 update(state.copy(page = currentPage, loadState = LoadState.Success(episodes)))
             } catch (e: Exception) {
-                update(state.copy(page = page - 1, loadState = LoadState.Failure(error = e)))
+                val message = errorConverter.convert(e)
+                update(state.copy(page = page - 1, loadState = LoadState.Failure(message = message)))
             }
         }
     }

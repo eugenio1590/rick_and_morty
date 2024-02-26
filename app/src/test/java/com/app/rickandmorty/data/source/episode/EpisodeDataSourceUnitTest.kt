@@ -1,5 +1,6 @@
 package com.app.rickandmorty.data.source.episode
 
+import android.content.Context
 import com.app.rickandmorty.data.dto.EpisodeDTO
 import com.app.rickandmorty.data.dto.PagedListDTO
 import com.app.rickandmorty.data.mapper.EpisodeMapper
@@ -12,9 +13,10 @@ import retrofit2.Response
 
 class EpisodeDataSourceUnitTest {
 
+    private val context: Context = mockk()
     private val mapper = EpisodeMapper()
     private val service: EpisodeService = mockk()
-    private val dataSource = EpisodeDataSource(mapper, service)
+    private val dataSource = EpisodeDataSource(context, mapper, service)
 
     @Test
     fun `find should call the service and return the episodes`(): Unit = runBlocking {
