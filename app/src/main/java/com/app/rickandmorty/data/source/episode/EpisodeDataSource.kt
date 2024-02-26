@@ -16,7 +16,7 @@ class EpisodeDataSource(
 ) : EpisodeRepository {
     override suspend fun find(page: Int, limit: Int): List<Episode> {
         val result = service.getEpisodeList(page = page)
-        val pagedList = result.body() ?: emptyList()
+        val pagedList = result.takeIf { it.isSuccessful }?.body() ?: emptyList()
         return pagedList.map { mapper.toEntity(it) }
     }
 }

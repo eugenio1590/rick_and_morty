@@ -7,8 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
@@ -17,16 +18,19 @@ import java.util.concurrent.TimeUnit
 class ApiModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
         return OkHttpClient.Builder()
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor(logging)
             .build()
     }
 
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val json = Json { ignoreUnknownKeys = true }
-        val contentType = MediaType.get("application/json")
+        val contentType = "application/json".toMediaType()
         return Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/api/")
             .client(okHttpClient)
